@@ -1,0 +1,70 @@
+
+
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.72'
+    id 'com.github.spacialcircumstances.gradle-cucumber-reporting' version '0.1.22'
+
+}
+
+configurations {
+    driver
+}
+
+dependencies {
+    driver group: 'postgres', name: 'org.postgresql.Driver', version : ''
+    //testImplementation("org.postgresql.Driver")
+}
+
+
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    // https://mvnrepository.com/artifact/io.cucumber/cucumber-java
+    compile group: 'io.cucumber', name: 'cucumber-java', version: '6.6.0'
+    // https://mvnrepository.com/artifact/io.rest-assured/rest-assured
+    testCompile group: 'io.rest-assured', name: 'rest-assured', version: '4.3.0'
+    // https://mvnrepository.com/artifact/io.cucumber/cucumber-junit
+    testCompile group: 'io.cucumber', name: 'cucumber-junit', version: '6.6.0'
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.0'
+    runtimeOnly("org.postgresql:postgresql:42.2.18")
+    // https://mvnrepository.com/artifact/net.masterthought/cucumber-reporting
+    compile group: 'net.masterthought', name: 'cucumber-reporting', version: '5.3.1'
+    // https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-common
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-common', version: '1.4.21'
+    // https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: '1.4.21'
+    // https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8', version: '1.4.21'
+
+
+
+
+}
+cucumberReports {
+    outputDir = file('target')
+    buildId = '0'
+    reports = files('target/cucumber-reports.json')
+}
+
+test {
+    systemProperty "cucumber.options", System.getProperty("cucumber.options")
+}
+
+
+
+
+
+
+
+
+
